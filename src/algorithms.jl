@@ -2982,6 +2982,8 @@ for Alg in [
     :Rodas4P2,
     :Rodas5,
     :Rodas5P,
+    :Rodas5Pe,
+    :Rodas5Pr,
 ]
     @eval begin
         struct $Alg{CS, AD, F, P, FDT, ST, CJ} <:
