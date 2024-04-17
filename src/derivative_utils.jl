@@ -746,12 +746,10 @@ end
         W = WOperator{false}(mass_matrix, dtgamma, J, uprev; transform = W_transform)
     elseif DiffEqBase.has_jac(f)
         J = f.jac(uprev, p, t)
-        if J isa StaticArray &&
-           integrator.alg isa
-           Union{
-            Rosenbrock23, Rodas23W, Rodas3P,Rodas4, Rodas4P, Rodas4P2, Rodas5, Rodas5P, Rodas5Pe, Rodas5Pr}
-            W = W_transform ? J - mass_matrix * inv(dtgamma) :
-                dtgamma * J - mass_matrix
+        if J isa StaticArray && integrator.alg isa Union{Rosenbrock23, Rodas23W, Rodas3P,
+            Rodas4, Rodas4P, Rodas4P2, Rodas5, Rodas5P, Rodas5Pe, Rodas5Pr}
+                W = W_transform ? J - mass_matrix * inv(dtgamma) :
+                    dtgamma * J - mass_matrix
         else
             if !isa(J, AbstractSciMLOperator) && (!isnewton(nlsolver) ||
                 nlsolver.cache.W.J isa AbstractSciMLOperator)
@@ -772,9 +770,8 @@ end
             len = StaticArrayInterface.known_length(typeof(W_full))
             W = if W_full isa Number
                 W_full
-            elseif len !== nothing &&
-                   integrator.alg isa
-                   Union{Rosenbrock23, Rodas23W, Rodas3P, Rodas4, Rodas4P, Rodas4P2, Rodas5, Rodas5P, Rodas5Pe, Rodas5Pr}
+            elseif len !== nothing && integrator.alg isa Union{Rosenbrock23, Rodas23W, Rodas3P, 
+                Rodas4, Rodas4P, Rodas4P2, Rodas5, Rodas5P, Rodas5Pe, Rodas5Pr}
                    StaticWOperator(W_full)
             else
                 DiffEqBase.default_factorize(W_full)
