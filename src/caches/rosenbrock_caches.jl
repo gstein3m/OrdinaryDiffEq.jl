@@ -68,9 +68,9 @@ TruncatedStacktraces.@truncate_stacktrace Rosenbrock23Cache 1
 end
 
 function alg_cache(alg::Rosenbrock23, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     k₁ = zero(rate_prototype)
     k₂ = zero(rate_prototype)
     k₃ = zero(rate_prototype)
@@ -93,8 +93,7 @@ function alg_cache(alg::Rosenbrock23, u, rate_prototype, ::Type{uEltypeNoUnits},
     linsolve_tmp = zero(rate_prototype)
 
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -112,9 +111,9 @@ function alg_cache(alg::Rosenbrock23, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rosenbrock32, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     k₁ = zero(rate_prototype)
     k₂ = zero(rate_prototype)
     k₃ = zero(rate_prototype)
@@ -138,8 +137,7 @@ function alg_cache(alg::Rosenbrock32, u, rate_prototype, ::Type{uEltypeNoUnits},
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
 
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -172,9 +170,9 @@ function Rosenbrock23ConstantCache(::Type{T}, tf, uf, J, W, linsolve, autodiff) 
 end
 
 function alg_cache(alg::Rosenbrock23, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -202,9 +200,9 @@ function Rosenbrock32ConstantCache(::Type{T}, tf, uf, J, W, linsolve, autodiff) 
 end
 
 function alg_cache(alg::Rosenbrock32, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -260,9 +258,9 @@ end
 end
 
 function alg_cache(alg::ROS3P, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     du = zero(rate_prototype)
     du1 = zero(rate_prototype)
     du2 = zero(rate_prototype)
@@ -284,8 +282,7 @@ function alg_cache(alg::ROS3P, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -299,9 +296,9 @@ function alg_cache(alg::ROS3P, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::ROS3P, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -342,9 +339,9 @@ end
 end
 
 function alg_cache(alg::Rodas3, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     du = zero(rate_prototype)
     du1 = zero(rate_prototype)
     du2 = zero(rate_prototype)
@@ -367,8 +364,7 @@ function alg_cache(alg::Rodas3, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -392,9 +388,9 @@ struct Rosenbrock34ConstantCache{TF, UF, Tab, JType, WType, F} <:
 end
 
 function alg_cache(alg::Rodas3, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -428,8 +424,7 @@ jac_cache(c::Rosenbrock4Cache) = (c.J, c.W)
 
 ### Rodas methods
 
-struct Rodas23WConstantCache{TF, UF, Tab, JType, WType, F, AD} <:
-       OrdinaryDiffEqConstantCache
+struct Rodas23WConstantCache{TF, UF, Tab, JType, WType, F, AD} <: OrdinaryDiffEqConstantCache
     tf::TF
     uf::UF
     tab::Tab
@@ -520,9 +515,9 @@ end
 end
 
 function alg_cache(alg::Rodas23W, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     dense3 = zero(rate_prototype)
@@ -549,8 +544,7 @@ function alg_cache(alg::Rodas23W, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -564,9 +558,9 @@ end
 
 TruncatedStacktraces.@truncate_stacktrace Rodas23WCache 1
 function alg_cache(alg::Rodas3P, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     dense3 = zero(rate_prototype)
@@ -593,8 +587,7 @@ function alg_cache(alg::Rodas3P, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -609,9 +602,9 @@ end
 TruncatedStacktraces.@truncate_stacktrace Rodas3PCache 1
 
 function alg_cache(alg::Rodas23W, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -624,9 +617,9 @@ function alg_cache(alg::Rodas23W, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas3P, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -686,9 +679,9 @@ end
 end
 
 function alg_cache(alg::Rodas4, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     du = zero(rate_prototype)
@@ -715,8 +708,7 @@ function alg_cache(alg::Rodas4, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -732,9 +724,9 @@ end
 TruncatedStacktraces.@truncate_stacktrace Rodas4Cache 1
 
 function alg_cache(alg::Rodas4, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -747,9 +739,9 @@ function alg_cache(alg::Rodas4, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas42, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     du = zero(rate_prototype)
@@ -776,8 +768,7 @@ function alg_cache(alg::Rodas42, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -791,9 +782,9 @@ function alg_cache(alg::Rodas42, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas42, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -806,9 +797,9 @@ function alg_cache(alg::Rodas42, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas4P, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     du = zero(rate_prototype)
@@ -835,8 +826,7 @@ function alg_cache(alg::Rodas4P, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -850,9 +840,9 @@ function alg_cache(alg::Rodas4P, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas4P, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -865,9 +855,9 @@ function alg_cache(alg::Rodas4P, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas4P2, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     du = zero(rate_prototype)
@@ -894,8 +884,7 @@ function alg_cache(alg::Rodas4P2, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -909,9 +898,9 @@ function alg_cache(alg::Rodas4P2, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas4P2, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -936,8 +925,7 @@ struct Rosenbrock5ConstantCache{TF, UF, Tab, JType, WType, F} <: OrdinaryDiffEqC
     linsolve::F
 end
 
-@cache mutable struct Rosenbrock5Cache{
-    uType, rateType, uNoUnitsType, JType, WType, TabType,
+@cache mutable struct Rosenbrock5Cache{uType, rateType, uNoUnitsType, JType, WType, TabType,
     TFType, UFType, F, JCType, GCType, RTolType, A} <:
                       RosenbrockMutableCache
     u::uType
@@ -978,9 +966,9 @@ end
 TruncatedStacktraces.@truncate_stacktrace Rosenbrock5Cache 1
 
 function alg_cache(alg::Rodas5, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{true}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     dense1 = zero(rate_prototype)
     dense2 = zero(rate_prototype)
     dense3 = zero(rate_prototype)
@@ -1010,8 +998,7 @@ function alg_cache(alg::Rodas5, u, rate_prototype, ::Type{uEltypeNoUnits},
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -1026,9 +1013,9 @@ function alg_cache(alg::Rodas5, u, rate_prototype, ::Type{uEltypeNoUnits},
 end
 
 function alg_cache(alg::Rodas5, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
@@ -1072,8 +1059,7 @@ function alg_cache(alg::Union{Rodas5P,Rodas5Pe,Rodas5Pr}, u, rate_prototype, ::T
     uf = UJacobianWrapper(f, t, p)
     linsolve_tmp = zero(rate_prototype)
     linprob = LinearProblem(W, _vec(linsolve_tmp); u0 = _vec(tmp))
-    Pl, Pr = wrapprecs(
-        alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
+    Pl, Pr = wrapprecs(alg.precs(W, nothing, u, p, t, nothing, nothing, nothing,
             nothing)..., weight, tmp)
     linsolve = init(linprob, alg.linsolve, alias_A = true, alias_b = true,
         Pl = Pl, Pr = Pr,
@@ -1088,9 +1074,9 @@ function alg_cache(alg::Union{Rodas5P,Rodas5Pe,Rodas5Pr}, u, rate_prototype, ::T
 end
 
 function alg_cache(alg::Union{Rodas5P,Rodas5Pe,Rodas5Pr}, u, rate_prototype, ::Type{uEltypeNoUnits},
-        ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
-        dt, reltol, p, calck,
-        ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
+    ::Type{uBottomEltypeNoUnits}, ::Type{tTypeNoUnits}, uprev, uprev2, f, t,
+    dt, reltol, p, calck,
+    ::Val{false}) where {uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits}
     tf = TimeDerivativeWrapper(f, u, p)
     uf = UDerivativeWrapper(f, t, p)
     J, W = build_J_W(alg, u, uprev, p, t, dt, f, uEltypeNoUnits, Val(false))
