@@ -1,7 +1,7 @@
 @muladd function ode_determine_initdt(u0, t, tdir, dtmax, abstol, reltol, internalnorm,
-    prob::DiffEqBase.AbstractODEProblem{uType, tType, true
-    },
-    integrator) where {tType, uType}
+        prob::DiffEqBase.AbstractODEProblem{uType, tType, true
+        },
+        integrator) where {tType, uType}
     _tType = eltype(tType)
     f = prob.f
     p = integrator.p
@@ -226,9 +226,9 @@ function Base.showerror(io::IO, e::TypeNotConstantError)
 end
 
 @muladd function ode_determine_initdt(u0, t, tdir, dtmax, abstol, reltol, internalnorm,
-    prob::DiffEqBase.AbstractODEProblem{uType, tType,
-        false},
-    integrator) where {uType, tType}
+        prob::DiffEqBase.AbstractODEProblem{uType, tType,
+            false},
+        integrator) where {uType, tType}
     _tType = eltype(tType)
     f = prob.f
     p = prob.p
@@ -250,9 +250,9 @@ end
         @warn("First function call produced NaNs. Exiting. Double check that none of the initial conditions, parameters, or timespan values are NaN.")
     end
 
-    if Base.promote_op(/, typeof(u0), typeof(oneunit(t))) !== typeof(f₀)
-        throw(TypeNotConstantError(Base.promote_op(/, typeof(u0), typeof(oneunit(t))),
-            typeof(f₀)))
+    inferredtype = Base.promote_op(/, typeof(u0), typeof(oneunit(t)))
+    if !(f₀ isa inferredtype)
+        throw(TypeNotConstantError(inferredtype, typeof(f₀)))
     end
 
     d₁ = internalnorm(f₀ ./ sk .* oneunit_tType, t)
@@ -288,9 +288,9 @@ end
 end
 
 @inline function ode_determine_initdt(u0, t, tdir, dtmax, abstol, reltol, internalnorm,
-    prob::DiffEqBase.AbstractDAEProblem{duType, uType,
-        tType},
-    integrator) where {duType, uType, tType}
+        prob::DiffEqBase.AbstractDAEProblem{duType, uType,
+            tType},
+        integrator) where {duType, uType, tType}
     _tType = eltype(tType)
     tspan = prob.tspan
     init_dt = abs(tspan[2] - tspan[1])
