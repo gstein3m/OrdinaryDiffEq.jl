@@ -80,6 +80,9 @@ University of Geneva, Switzerland.
 - Steinebach G.   Construction of Rosenbrock–Wanner method Rodas5P and numerical benchmarks within the Julia Differential Equations package.
  In: BIT Numerical Mathematics, 63(2), 2023
 
+#### Rodas6P
+- Steinebach G.   Construction of Rosenbrock–Wanner method Rodas6P, to prepare.
+
  #### Rodas23W, Rodas3P, Rodas5Pe, Rodas5Pr
 - Steinebach G. Rosenbrock methods within OrdinaryDiffEq.jl - Overview, recent developments and applications -
  Preprint 2024
@@ -102,7 +105,8 @@ for Alg in [
     :Rodas5,
     :Rodas5P,
     :Rodas5Pe,
-    :Rodas5Pr]
+    :Rodas5Pr,
+    :Rodas6P]
     @eval begin
         struct $Alg{CS, AD, F, P, FDT, ST, CJ, StepLimiter, StageLimiter} <:
                OrdinaryDiffEqRosenbrockAdaptiveAlgorithm{CS, AD, FDT, ST, CJ}
@@ -137,6 +141,11 @@ Rosenbrock23
     "Efficient for medium tolerance stiff problems. A 5th order A-stable and stiffly stable embedded Rosenbrock method for differential-algebraic problems.",
     "Rodas5P", with_step_limiter = true)
 Rodas5P
+
+@doc rosenbrock_docstring(
+    "Efficient for medium tolerance stiff problems. A 6th order A-stable and stiffly stable embedded Rosenbrock method for differential-algebraic problems.",
+    "Rodas6P", with_step_limiter = true)
+Rodas6P
 
 @doc rosenbrock_docstring(
     "A 3/2-order L-stable Rosenbrock-W method optimized for stiff problems. Good balance of accuracy and computational efficiency.",
